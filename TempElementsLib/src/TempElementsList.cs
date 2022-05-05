@@ -11,30 +11,19 @@ namespace TempElementsLib
 
         public IReadOnlyCollection<ITempElement> Elements => elements;
 
-        ~TempElementsList()
-        {
-
-        }
+        ~TempElementsList() => throw new NotImplementedException();
 
         public T AddElement<T>() where T : ITempElement, new()
-        {
-            return new T();
-        }
-        
+            => throw new NotImplementedException();
+
         public void DeleteElement<T>(T element) where T : ITempElement, new()
-        {
-            elements.Remove(element);
-        }
+            => throw new NotImplementedException();
 
         public void MoveElementTo<T>(T element, string newPath) where T : ITempElement, new()
-        {
-            elements
-        }
+            => throw new NotImplementedException();
 
         public void RemoveDestroyed()
-        {
-
-        }
+            => throw new NotImplementedException();
 
         public bool IsEmpty => ((ITempElements)this).IsEmpty;
 
@@ -47,7 +36,7 @@ namespace TempElementsLib
                 if (disposing)
                 {
                     // TODO: dispose managed state (managed objects)
-
+                    
                 }
 
                 // TODO: free unmanaged resources (unmanaged objects) and override finalizer
