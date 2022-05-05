@@ -1,9 +1,70 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using TempElementsLib.Interfaces;
 
-namespace TempElementsLib.Interfaces
+namespace TempElementsLib
 {
+    public class TempDir : ITempDir
+    {
+        DirectoryInfo dirInfo;
+
+        public string DirPath;
+
+        public bool IsDestroyed;
+        public bool IsEmpty;
+
+        bool ITempElement.IsDestroyed { get; }
+
+        string ITempDir.DirPath { get; }
+
+        bool ITempDir.IsEmpty { get; }
+
+        ~TempDir()
+        {
+            Dispose(IsDestroyed);
+        }
+        public TempDir() : this(Path.GetTempFileName()) { }
+
+
+        public TempDir(string filename)
+        {
+            //DirPath = filename;
+            dirInfo = new DirectoryInfo(filename);
+            File.Create(filename);
+        }
+
+        public void Dispose()
+        {
+            Dispose(IsDestroyed);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool v)
+        {
+            if (v)
+            {
+            }
+
+            try
+            {
+                dirInfo?.Delete();
+            }
+            catch (IOException exception)
+            {
+                Console.WriteLine(exception);
+            }
+        }
+
+        public void Empty()
+        {
+            IsEmpty = Directory.Exists(DirPath);
+            if (!IsEmpty)
+            {
+                File.Delete(DirPath);
+            }
+        }
+    }
     public class TempTxtFile : TempFile
     {
         TextReader textReader;
