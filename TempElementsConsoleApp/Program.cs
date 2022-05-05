@@ -8,9 +8,10 @@ namespace TempElementsConsoleApp
     {
         static void Main(string[] args)
         {
-            TempFile text = new TempFile("E:\\Test_srodsemestralny");
-            text.AddText("abc");
-            
+            TempTxtFile text = new TempTxtFile("E:\\test");
+            text.Write("1233d");
+            text.ReadAllText();
+            text.ReadLine();
         }
     }
 }
